@@ -1,0 +1,132 @@
+﻿@charset "utf-8";
+
+
+/* Skip Navigation */
+#accessibility a {display:block; position:absolute; top:-40px; left:0; z-index:10; width:100%; height:25px; line-height:25px; text-align:center; font-weight:bold; transition:0.3s; -webkit-transition:0.3s; -moz-transition:0.3s; -o-transition:0.3s;}
+#accessibility a:hover {top: 0px; z-index:1000; padding:10px 0; background:#4764ce; color:#fff;}
+#accessibility a:active {top: 0px; z-index:1000; padding:10px 0; background:#4764ce; color:#fff;}
+#accessibility a:focus {top: 0px; z-index:1000; padding:10px 0; background:#4764ce; color:#fff;}
+a#content {margin:0; padding:0; font-size:0; line-height:0;}
+
+/* Float Clear */
+.clr:after{content: ''; display: block; clear: both;}
+
+/* 텍스트 정렬 */
+.tal{text-align:left !important;}
+.tac{text-align:center !important;}
+.tar{text-align:right !important;}
+.valm{vertical-align:middle !important;}
+.valt{vertical-align:top !important;}
+
+
+/* Form Control */
+input,
+select,
+textarea,
+label{display:inline-block; box-sizing:border-box; width:auto; vertical-align:middle; line-height:1.4;}
+.cont_body input[type=text],
+.cont_body input[type=password],
+.cont_body input[type=tel],
+.cont_body input[type=date],
+.cont_body input[type=email],
+.cont_body select,
+.cont_body textarea{padding:7px 8px; border:1px solid #dedede;background:#fff; vertical-align:middle;}
+/*.cont_body input[type=text],
+.cont_body input[type=password],
+.cont_body select{height:36px;}*/
+.cont_body select::-ms-expand {background-color: transparent; border: 0;}
+.cont_body input[type=file]{background:#eee; font-size:1.0em;}
+.cont_body input[type=checkbox],
+.cont_body input[type=radio]{width:13px; height:13px; margin:2px 3px 1px 0;}
+.cont_body input[readonly],
+.cont_body input[disabled]{background: #eee;}
+
+.cont_body input[type="radio"] {
+    display:none;
+}
+
+.cont_body  input[type="radio"] + label {
+    color:#555;
+    font-size:16px;
+}
+.radio_box + .radio_box{display:inline-block;margin-left:40px;}
+.cont_body input[type="radio"] + label span {
+    display:inline-block;
+    z-index:99;
+    width:20px;
+    height:20px;
+    margin:0 10px 0 0;
+    vertical-align:middle;
+    background:url(/seantour_map/images/travel/brd/bg_radio.png) 0 0 no-repeat;
+    cursor:pointer;
+}
+
+.cont_body input[type="radio"]:checked + label span {
+	z-index:100;
+     background:url(/seantour_map/images/travel/brd/bg_radio_check.png) 0 0 no-repeat;
+}
+
+
+/* Button Common */
+.button,
+.button *{position:relative; display:inline-block; box-sizing:border-box; overflow:visible; margin:0; padding:0; text-decoration:none !important; white-space:nowrap; text-align:center; vertical-align:middle; cursor:pointer; transition:all .3s;}
+.button span{height: 100%; vertical-align: top;}
+.button img{vertical-align:middle;}
+/* Button Size - default / small / large */
+.button{height:40px; margin:5px 3px; width:100px; border:1px solid transparent; /*border-radius:0.2em;*/ font-size:16px; line-height:40px;}
+.button.xs{height:21px; padding:0 10px; font-size:11px; line-height:21px;}
+.button.sm{height:45px; padding:0 25px; font-size:16px; line-height:45px;}
+.button.lg{height:55px; padding:0 65px;  font-size:17px; line-height:55px;}
+/* Button Color */
+.button{background-color:#444; color:#fff !important;}
+.button.gray{background-color:#555; color:#fff !important;}
+.button.violet{background-color:#5a63bf; color:#fff !important;}
+.button.lightblue{background-color:#0198d7; color:#fff !important;}
+.button.orange{background-color:#d27108; color:#fff !important;}
+
+/* Button Active */
+.button:hover,
+.button:focus{background:#444;opacity:.8; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2), 0 4px 10px 0 rgba(0, 0, 0, 0.19);}
+/* Button border */
+.button.border{background-color:transparent;border-color:#000;color:#000  !important;}
+.button.border:hover,
+.button.border:focus{border-color:#333;color:#444;}
+
+.btnArea{margin:30px 0 0;text-align:center;}
+.btn_excel{position:relative;display:inline-block;min-width:88px;height:29px;line-height:29px;padding-left:10px;background:#88929e;font-size:13px;color:#fff;}
+ .btn_excel:before{content:'';display:inline-block;width:18px;height:17px;position:absolute;top:50%;left:9px;margin-top:-9px;background:url(../../images/travel/common/icon_excel.gif) no-repeat 50% 50%;}
+
+
+/* 상단,좌측 제목 */
+.tbl{table-layout:fixed;box-sizing:border-box;width:100%;margin-bottom:5px; border-top:2px solid #384ea1;}
+.tbl th,
+.tbl td{padding:20px 15px;border-bottom:1px solid #d8d8d6;border-left:1px solid #d8d8d6;line-height: 1.5;font-size:16px;color:#363636;}
+.tbl thead th{border-bottom:1px solid #c7c7c3; background:#f6f6f9;}
+.tbl tbody td .tit{font-family: 'Proxima Nova';font-size:18px;font-weight:600;color:#3249a0;}
+.tbl tbody td .euquip_lst{}
+.tbl tbody td .euquip_lst li{position:relative;padding-left:12px;font-size:14px;color:#666;}
+.tbl tbody td .euquip_lst li:before{content:'';display:inline-block;position:absolute;top:8px;left:0;width:5px;height:5px;background:url(/seantour_map/images/travel/content/ico_eq_lst.png) no-repeat 0 0;}
+.tbl tbody td .euquip_lst li .font_red{color:#f02372;}
+.tbl th:first-child,
+.tbl td:first-child{border-left-color:transparent;}
+/* 모바일용 테이블 스크롤 */
+.table_scroll{overflow:hidden;}
+
+@media screen and (max-width:1024px){
+	.button{width:80px;height:34px;line-height:34px;font-size:13px;}
+}	
+
+@media screen and (max-width:768px){
+	
+	.tbl{min-width:640px;}
+	.tbl th, .tbl td{padding:12px 10px;font-size:14px;}
+	.tbl tbody td .tit{font-size:15px;}
+	.tbl tbody td .euquip_lst li{font-size:13px;}
+	.table_scroll{overflow:auto;}
+ }
+
+@media screen and (max-width:640px){
+	.button{width:70px;height:30px;line-height:30px;font-size:12px;}
+}
+
+ 
