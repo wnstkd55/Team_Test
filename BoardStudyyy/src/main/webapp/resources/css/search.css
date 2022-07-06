@@ -1,0 +1,325 @@
+@charset "UTF-8";
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: #666;
+    font-size: 15px;
+    font-family: 'Noto Sans', sans-serif;
+    word-break: keep-all;
+    word-wrap: break-word;
+    white-space: normal;
+    line-height: 1.5;
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+.blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0px, 0px, 0px, 0px);
+    margin: 10px;
+    width: 1px;
+    height: 1px;
+}
+
+.mainDiv {
+    width: 100%;
+    position: relative;
+	max-width: 600px;
+	margin:auto;
+}
+
+/* -------TOP------- */
+
+#divtop {
+    position: relative;
+    background: #ff7a00;
+    height: 45px;
+    text-align: center;
+}
+
+#divtop h3 {
+    width: 200px;
+    height: 45px;
+    line-height: 45px;
+    margin: 0 auto;
+}
+
+#divtop .top_tit {
+    font-size: 18px;
+    font-weight: 400;
+    position: relative;
+    color: #fff;
+}
+/* -------CONTENT------- */
+
+#divSearch {
+    padding: 15px 20px;
+    /*background: beige;*/
+}
+
+#divSearch p {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-left: 15px;
+    color: #333;
+}
+
+#divSearch p b {
+    color: #ff7a00;
+}
+
+#divSearch .search_box {
+    border-bottom: 2px solid #ff7a00;
+    padding: 0 15px;
+}
+
+#divSearch .search_box .inputGrp {
+    overflow: hidden;
+}
+
+.inputGrp .btn_sch {
+    background: transparent;
+    border: 0;
+    float: right;
+    height: 44px;
+    line-height: 44px;
+    outline: 0;
+    position: relative;
+}
+
+.inputGrp .btn_sch .ico_sch {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.inputGrp .btn_sch .ico_sch:before,
+.inputGrp .btn_sch .ico_sch:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.inputGrp .btn_sch .ico_sch:before {
+    width: 13px;
+    height: 13px;
+    border: 2px solid #ff7a00;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+}
+
+.inputGrp .btn_sch .ico_sch:after {
+    width: 2px;
+    height: 10px;
+    background: #ff7a00;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    top: 12px;
+    left: 16px;
+}
+
+.inputGrp .input_sch {
+    height: 44px;
+    background: #fff;
+    padding: 5px 9px 0 0px;
+    overflow: hidden;
+}
+
+.inputGrp .input_sch input {
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    font-size: 17px;
+}
+
+#divSearchlist {
+    background: #f4f4f4;
+    padding: 20px;
+    clear: both;
+}
+#divSearchlist .result {
+    margin-bottom: 8px;
+}
+#divSearchlist .tb_wrap {
+    height: 400px;
+    overflow-y: auto;
+}
+
+#divSearchlist table {
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+#divSearchlist table thead * {
+    height: 0ox;
+    line-height: 0px;
+    text-indent: -9999px;
+    font-size: 0;
+    color: #fff;
+}
+
+#divSearchlist table tbody td {
+    background: #fff;
+    padding: 10px 15px;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+ul.tb1 {
+    display: table;
+    width: 100%;
+}
+
+ul.tb1>li.row {
+    display: table-row !important;
+}
+
+ul.tb1>li.row div:nth-child(2) {
+    padding-bottom: 7px;
+}
+
+ul.tb1>li.row>div.th {
+    display: table-cell;
+    width: 70px;
+}
+
+ul.tb1>li.row span.label {
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    color: #fff;
+    padding: 2px 5px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+ul.tb1>li.row span.st {
+    background: #8faae4;
+}
+
+ul.tb1>li.row span.nm {
+    background: #b5bbd1;
+    width: 240px;
+    margin-right: 10px;
+}
+
+ul.tb1>li.row span.num {
+    background: #b5bbd1;
+}
+
+ul.tb1>li.row span.sel {
+    background: #ff6600;
+    cursor: pointer;
+}
+
+ul.tb1>li.row .post {
+    color: #ff2121;
+    font-size: 18px;
+}
+
+/* Page navigation */
+#pageZone {
+    padding: 5px 0;
+    text-align: center;
+}
+
+.btn_pageNum {
+    width: 35px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #eeeeee;
+    display: inline-block;
+    color: inherit;
+    font-size: 12px;
+}
+
+.btn_pageNum_active {
+    background-color: #fce1d8;
+}
+
+.btn_pageNum:hover {
+    background-color: #fef1ec;
+}
+
+.btn_pageNum:active {
+    background-color: #fce1d8;
+}
+
+/*.pagination {
+    padding: 5px 0;
+    text-align: center;
+}
+.pagination a {
+    width: 38px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #eeeeee;
+    display: inline-block;
+    color: inherit;
+    font-size: 12px;
+}
+.pagination strong {
+    margin: 0 10px;
+}
+.pagination a:hover {
+    background-color: #fef1ec;
+}
+
+.pagination a:active {
+    background-color: #fce1d8;
+}*/
+
+/* **************************************** *
+ * paging
+ * **************************************** */
+.pagination{margin:10px 0; text-align:center; line-height:normal;}
+.pagination a,
+.pagination strong{display:inline-block; position:relative; box-sizing:border-box; min-width:32px; height:32px; padding:0 5px; line-height:32px; margin:2px 0px; box-sizing:border-box; background:#fff;  font-size:15px; font-weight:600; color:#111; text-decoration:none; vertical-align:middle;}
+.pagination strong{position:relative; z-index:10; color:#930c88; text-decoration:underline;}
+.pagination a[class^="page_"]{overflow:hidden; text-indent:-9999em;}
+.pagination .page_prev:after,
+.pagination .page_prevend:after,
+.pagination .page_next:after,
+.pagination .page_nextend:after{content:''; position:absolute; top:0; left:0; right:0; bottom:0; width:14px; height:11px; margin:auto;}
+.pagination .page_prev:after{width:7px; background:url(/seantour_map/images/travel/common/icon_prev.gif) no-repeat 0 0;}
+.pagination .page_prevend:after{background:url(/seantour_map/images/travel/common/icon_prevend.gif) no-repeat 0 0;}
+.pagination .page_next:after{width:7px; background:url(/seantour_map/images/travel/common/icon_next.gif) no-repeat 0 0;}
+.pagination .page_nextend:after{background:url(/seantour_map/images/travel/common/icon_nextend.gif) no-repeat 0 0;}

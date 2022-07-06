@@ -11,9 +11,9 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" href="resources/css/style_auto.css">
-<script src = "resources/js/auto3.js"></script>
-<script src = "resources/js/map.js"></script>
+<link rel="stylesheet" href="//resources/css/style_auto.css">
+<script src = "//resources/js/auto3.js"></script>
+<script src = "//resources/js/map.js"></script>
 <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -94,7 +94,7 @@
           <div class="card shadow-sm">
           <div class="image">
           	<a href="tour2.jsp?c_ny=<%=citylist.get(i).getC_ny()%>&c_nx=<%=citylist.get(i).getC_nx()%>&c_name=<%=citylist.get(i).getC_name()%>">
-            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/images/city_pic/<%=citylist.get(i).getC_pic() %>" alt="도시사진">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/resources/images/city_pic/<%=citylist.get(i).getC_pic() %>" alt="도시사진">
             </a>
           </div>
             <div class="card-body">
