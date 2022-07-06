@@ -83,7 +83,7 @@
         %>
           <tr>
             <td><%=tlist.get(i).getT_name() %></td>
-            <td><img src="resources/images/tour_pic/<%=tlist.get(i).getT_photo() %>" width=100 height=100></td>
+            <td><img src="/resources/images/tour_pic/<%=tlist.get(i).getT_photo() %>" width=100 height=100></td>
             <td><%=tlist.get(i).getT_tel() %></td>
             <td><button type = "button" >+</button></td>
             <td><%=tlist.get(i).getT_intro() %></td>

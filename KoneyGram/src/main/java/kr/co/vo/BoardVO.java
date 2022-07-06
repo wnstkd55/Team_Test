@@ -2,6 +2,7 @@ package kr.co.vo;
 
 import java.util.Date;
 
+
 public class BoardVO {
 
 	private int bno;

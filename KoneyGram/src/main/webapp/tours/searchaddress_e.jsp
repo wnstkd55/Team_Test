@@ -286,12 +286,13 @@ function setPoiResultEl(arrResultArr) {
 }
 
 function getaddressInfo(roadFullAddr, latitude, longitude){
-	alert(roadFullAddr);
+	/*값 확인을 위한 출력문*/
+	/* 	alert(roadFullAddr);
 	alert(latitude);
-	alert(longitude);
-	opener.document.getElementById('dp_name').value = roadFullAddr;
-	opener.document.getElementById('dp_ny').value = latitude;
-	opener.document.getElementById('dp_nx').value = longitude;
+	alert(longitude); */
+	opener.document.getElementById('ep_name').value = roadFullAddr;
+	opener.document.getElementById('ep_ny').value = latitude;
+	opener.document.getElementById('ep_nx').value = longitude;
 	window.close();
 }
 

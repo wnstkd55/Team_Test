@@ -39,8 +39,13 @@ function setDestination(destAxisY, destAxisX, destTitle) {	//정보 받기
 }
 
 /*주소 찾기 팝업창*/
-function searchAddress(status, idx){
-	var pop = window.open("searchaddress1.jsp?status="+status+"&idx="+idx,"pop","width=600,height=670, scrollbars=yes, resizable=yes");
+/*시작점 주소찾기*/
+function searchAddressd(status, idx){
+	var pop1 = window.open("searchaddress_d.jsp?status="+status+"&idx="+idx,"pop1","width=600,height=670, scrollbars=yes, resizable=yes");
+}
+/*도착점 주소찾기*/
+function searchAddresse(status, idx){
+	var pop2 = window.open("searchaddress_e.jsp?status="+status+"&idx="+idx,"pop2","width=600,height=670, scrollbars=yes, resizable=yes");
 }
 
 /*관광지 리스트 보기*/

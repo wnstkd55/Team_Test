@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="/resources/css/style_auto2.css">
 <script src = "/resources/js/auto3.js"></script>
 <script src = "/resources/js/map.js"></script>
-<script src = "/resources/js/mapedit.js"></script>
- <script src="https://apis.openapi.sk.com/tmap/js?version=1&format=javascript&appKey=l7xx0027c9071859472394ee1ff449ed1fdf"></script>
+<script src = "/resources/js/mapedit1.js"></script>
+ <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx0027c9071859472394ee1ff449ed1fdf"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <meta charset="UTF-8">
@@ -98,9 +98,10 @@
 					<br>
 					<br>
 					<h5>출발지 입력하기</h5>
-					<input type = "text" id="dp_name" name="start_point" value="" placeholder="출발지 입력을 위해 클릭해주세요" onclick="searchAddress('S','1');">
-					<input type = "hidden" id="dp_ny" value="">
-					<input type = "hidden" id="dp_nx" value="">
+					<input type = "text" id="dp_name" name="dp_name" value="" placeholder="출발지 입력을 위해 클릭해주세요" onclick="searchAddressd('S','1');">
+					<input type = "hidden" id="dp_ny" name="dp_ny" value="">
+					<input type = "hidden" id="dp_nx" name="dp_nx" value="">
+					<button onclick="dpointMarker();">마커찍기</button>
 					<br>
 					<br>
 					<h5>관광지 입력하기</h5>
@@ -136,7 +137,9 @@
 					<br>
 					<br>
 					<h5>도착지 입력하기</h5>
-					<input type = "text" name="start_point" value="" placeholder="도착지를 입력을 위해 클릭해주세요" onclick="searchAddress('S','1');">
+					<input type = "text" id="ep_name" name="ep_name" value="" placeholder="도착지를 입력을 위해 클릭해주세요" onclick="searchAddresse('E','1');">
+					<input type = "hidden" id="ep_ny" name="ep_ny" value="">
+					<input type = "hidden" id="ep_nx" name="ep_nx" value="">
 					<br>
 					<br>
 					<br>
@@ -153,21 +156,33 @@
  	
 		let m_ny = <%=ny%>;
 		let m_nx = <%=nx%>;
+		
+		let s_ny = document.getElementById("dp_ny").value;
+		let s_nx = document.getElementById("dp_nx").value;
+		
+		let e_ny = document.getElementById("ep_ny").value;
+		let e_nx = document.getElementById("ep_nx").value;
 		var map;
 
 		function initTmap(){
-			map = new Tmap.Map({
-				div:'map_div',
+			map = new Tmapv2.Map("map_div",{
+				center: new Tmapv2.LatLng(m_ny, m_nx),
 				width : "800px",
-				height : "942px"
+				height : "942px",
+				zoom: 10
 			});
 			
-			map.setCenter(new Tmap.LonLat(m_nx, m_ny).transform("EPSG:4326", "EPSG:3857"), 10);
 		}
-		
-		function getaddressInfo(roadFullAddr, latitude, longitude){
-			document.getElementById(roadFullAddr).value
+		function dpointMarker(){
+			var marker = new Tmapv2.Marker({
+	            position: new Tmapv2.LatLng(s_ny,s_nx), //Marker의 중심좌표 설정.
+	            map: map, //Marker가 표시될 Map 설정..
+	            offset : new Tmapv2.Point(12,38), // 마커 아이콘의 오프셋 설정(생략시 Point(폭/2, 높이)로 설정)
+	            icon : 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_a.png', //마커 아이콘 설정.(생략시 기본이미지 적용)
+	            iconSize : new Tmapv2.Size(24,38) //마커 아이콘 사이즈 (생략시 이미지의 크기 적용)
+	        });
 		}
+	
 		
 	</script>
 

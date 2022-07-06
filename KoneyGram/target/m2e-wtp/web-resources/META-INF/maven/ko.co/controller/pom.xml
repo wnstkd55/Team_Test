@@ -180,7 +180,12 @@
 		    <version>3.1.1.RELEASE</version>
 		</dependency>
 		<!-- 트랜젝션 END -->
-		    
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.24</version>
+		</dependency>
 	</dependencies>
     <build>
         <plugins>
