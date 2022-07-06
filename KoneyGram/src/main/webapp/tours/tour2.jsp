@@ -174,13 +174,18 @@
 			
 		}
 		function dpointMarker(){
-			var marker = new Tmapv2.Marker({
+			
+			alert(s_ny);
+			alert(s_nx);
+			alert(e_ny);
+			alert(e_nx);
+			/* var marker = new Tmapv2.Marker({
 	            position: new Tmapv2.LatLng(s_ny,s_nx), //Marker의 중심좌표 설정.
 	            map: map, //Marker가 표시될 Map 설정..
 	            offset : new Tmapv2.Point(12,38), // 마커 아이콘의 오프셋 설정(생략시 Point(폭/2, 높이)로 설정)
 	            icon : 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_a.png', //마커 아이콘 설정.(생략시 기본이미지 적용)
 	            iconSize : new Tmapv2.Size(24,38) //마커 아이콘 사이즈 (생략시 이미지의 크기 적용)
-	        });
+	        }); */
 		}
 	
 		
