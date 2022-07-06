@@ -96,7 +96,7 @@
           	<a href="tour2.jsp?c_ny=<%=citylist.get(i).getC_ny()%>&c_nx=<%=citylist.get(i).getC_nx()%>&c_name=<%=citylist.get(i).getC_name()%>">
             <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="resources/images/city_pic/<%=citylist.get(i).getC_pic() %>" alt="도시사진">
             </a>
-          </div>  
+          </div>
             <div class="card-body">
               <p class="card-text"><%=citylist.get(i).getC_name() %></p>
               <div class="d-flex justify-content-between align-items-center">
