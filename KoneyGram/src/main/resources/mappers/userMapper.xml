@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="userMapper">
+	<!-- 회원가입 -->
+	<insert id="register">
+		INSERT INTO Users(userId, userPwd, userName, userAge, userEmail, userIntro)
+		VALUES(#{userId}, #{userPwd}, #{userName}, #{userAge}, #{userEmail}, #{userIntro})
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="kr.co.vo.UsersVO">
+		SELECT * FROM USERS WHERE USERID = #{userId} AND USERPWD = #{userPwd}
+	</select>
+	
+	<!-- 회원정보 수정 -->
+	<update id="userUpdate">
+		UPDATE USERS SET
+		USERPWD = #{userPwd},
+		USERNAME = #{userName},
+		USERAGE = #{userAge},
+		USEREMAIL = #{userEmail},
+		USERINTRO = #{userIntro}
+	</update>
+	
+	<!-- 회원탈퇴 -->
+	<delete id="userDelete">
+		DELETE FROM USERS
+		WHERE USERID = #{userId} AND USERPWD = #{userPwd}
+	</delete>
+	
+	<!-- 비밀번호 확인 -->
+	<select id="passChk" resultType="int">
+		SELECT COUNT(*) FROM USERS
+		WHERE USERID = #{userId} AND USERPWD = #{userPwd}
+	</select>
+	
+	<!-- 아이디 중복 체크 -->
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*) FROM USERS
+		WHERE USERID = #{userId}
+	</select>
+</mapper>
