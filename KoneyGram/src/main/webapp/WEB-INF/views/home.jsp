@@ -13,7 +13,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  
 </head>
-<a href="/board/list">게시판</a><br />
+<a href="/board/list">게시판</a><br/>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$("#logoutBtn").on("click", function(){

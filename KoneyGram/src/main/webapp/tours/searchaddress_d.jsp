@@ -131,7 +131,7 @@ $('#inpSearch').click(function(){
 	// 유효성 검사
 	isValidate();
 	
-	var appKey='l7xxdc2398be8423441f817695db47fd1e32';
+	var appKey='l7xx0027c9071859472394ee1ff449ed1fdf';
 	// var url = 'https://apis.openapi.sk.com/tmap/pois';
 	var url = $("#targetUrl").val();
 
@@ -287,12 +287,21 @@ function setPoiResultEl(arrResultArr) {
 
 function getaddressInfo(roadFullAddr, latitude, longitude){
 	/*값 확인을 위한 출력문*/
-	/* alert(roadFullAddr);
+	alert(roadFullAddr);
 	alert(latitude);
-	alert(longitude); */
-	opener.document.getElementById('dp_name').value = roadFullAddr;
-	opener.document.getElementById('dp_ny').value = latitude;
-	opener.document.getElementById('dp_nx').value = longitude;
+	alert(longitude);
+	
+	opener.document.getElementById("dp_name1") = roadFullAddr;
+	opener.document.getElementById("dp_ny1") = latitude;
+	opener.document.getElementById("dp_nx1") = longitude;
+	
+	parent.addMarker('S',longitude,latitude);
+	
+/* 	$("#dp_name", opener.document).val(roadFullAddr);
+	$("#dp_ny", opener.document).val(latitude);
+	$("#dp_nx", opener.document).val(longitude);
+ */	
+	
 	window.close();
 }
 
@@ -356,7 +365,7 @@ function setPagination(totalCnt) {
 /*
 function setAddress(roadFullAddr, latitude, longitude) {
 	if(typeof(window.opener) != "undefined") {
-		window.opener.addrCallBack(roadFullAddr, latitude, longitude, 'S', '1');
+		window.opener.addrCallBack(roadFullAddr, latitude, longitude, 'S');
 		window.self.close();
 	}
 }

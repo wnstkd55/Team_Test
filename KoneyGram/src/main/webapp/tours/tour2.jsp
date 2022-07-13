@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script	src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet" href="/resources/css/style_auto2.css">
+<link rel="stylesheet" href="/resources/css/layout.css">
  <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx0027c9071859472394ee1ff449ed1fdf"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -88,62 +89,58 @@
   </section>
   <div class="container">
 		<div class="contents">
-			<div class = "left_items">
+			<div class = "left_items" style="width:100%;">
 				<h4>일정만들기</h4>
-				<form name="make_sche" method="post">
+				<div class ="make_sche">
 					<input type="text" name="title" value="" placeholder="일정의 제목을 입력해주세요" >
 					<br>
 					<br>
 					<h5>출발지 입력하기</h5>
-					<input type = "text" id="dp_name" name="dp_name" value="" placeholder="출발지 입력을 위해 클릭해주세요" onclick="searchAddressd('S','1');">
-					<input type = "hidden" id="dp_ny" name="dp_ny" value="">
-					<input type = "hidden" id="dp_nx" name="dp_nx" value="">
-					<button id = "dpointcheck" onclick="dpointCheck();">마커찍기</button>
-					<button onClick="getRP()">경로요청 실행</button>
-					<br>
-					<br>
-					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
-						<a href="tourlist.jsp?c_name=<%=cityname %>" 
-							onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
-							관광리스트 보러가기
-						</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
-					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
-						<a href="tourlist.jsp?c_name=<%=cityname %>" 
-							onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
-							관광리스트 보러가기
-						</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
-					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
-							<a href="tourlist.jsp?c_name=<%=cityname %>" 
-								onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
-								관광리스트 보러가기
-							</a>
-							<input type = "hidden" id="t_ny" name="t_ny" value="">
-							<input type = "hidden" id="t_nx" name="t_nx" value="">
-					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
-							<a href="tourlist.jsp?c_name=<%=cityname %>" 
-								onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
-								관광리스트 보러가기
-							</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
-					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
-							<a href="tourlist.jsp?c_name=<%=cityname %>" 
-								onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
-								관광리스트 보러가기
-							</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
-					<br>
-					<br>
+					<input type = "text" id="dp_name1" name="dp_name" value="" placeholder="출발지 입력을 위해 클릭해주세요" onclick="searchAddressd('S');">
+					<input type = "hidden" id="dp_ny1" name="dp_ny" value="">
+					<input type = "hidden" id="dp_nx1" name="dp_nx" value="">
+					<button id = "dpointcheck" onclick="geoLocation('S')">마커찍기</button>
+					<div class = "tourlist" style="width:100%; height: 500px; border: 2px solid gray; overflow:scroll;">
+							<h5 style="text-align: center;">지역 관광지 리스트</h5>
+					 	<br>
+					 <table class="responsive-table">
+					    <thead>
+					      <tr>
+					      	<th scope="col">관광지명</th>
+					        <th scope="col">관광지사진</th>
+					        <th scope="col">관광지명주소(도로명)</th>
+					        <th scope="col">관광지명주소(지번)</th>
+					        <th scope="col">관광지 소개</th>
+					        <th scope="col">전화 번호</th>
+					        <th scope="col">관광루트로 지정</th>
+					        <th scope="col" style="display:none">dd</th>
+					        <th scope="col" style="display:none">dd</th>
+					      </tr>
+					    </thead>
+					    <tbody>
+					   	 <%
+					      	TourDAO tourdao = new TourDAO();
+					      	ArrayList<Tour> tlist = tourdao.SelectCity_T(cityname);
+					      	
+					      	for(int i=0; i<tlist.size(); i++){
+					      %>
+						      <tr>
+						        <th scope="row" id="t_name"><%=tlist.get(i).getT_name() %></th>
+						        <td data-title="사진"><img src="/resources/images/tour_pic/<%=tlist.get(i).getT_photo() %>" width=100 height=100></td>
+						        <td data-title="도로명주소"><%=tlist.get(i).getT_loadaddress() %></td>
+						        <td data-title="지번 주소" data-type="currency"><%=tlist.get(i).getT_gnumaddress() %></td>
+						        <td data-title="간단소개" data-type="currency"><%=tlist.get(i).getT_intro() %></td>
+						        <td data-title="전화번호" data-type="currency"><%=tlist.get(i).getT_tel() %></td>
+						      	<td data-title="관광지로 지정"><button onclick="TourMarker('P',<%=tlist.get(i).getT_ny() %>,<%=tlist.get(i).getT_nx() %>)">추가하기</button></td>
+						      	<td data-title="관광지 위도" id="t_ny" style="display:none"><%=tlist.get(i).getT_ny() %></td>
+						      	<td data-title="관광지 경도" id="t_nx" style="display:none"><%=tlist.get(i).getT_nx() %></td>
+						      </tr>
+					      <%
+					      	}
+					      %>
+					    </tbody>
+					  </table>	
+					</div>
 					<h5>도착지 입력하기</h5>
 					<input type = "text" id="ep_name" name="ep_name" value="" placeholder="도착지를 입력을 위해 클릭해주세요" onclick="searchAddresse('E','1');">
 					<input type = "hidden" id="ep_ny" name="ep_ny" value="">
@@ -153,93 +150,76 @@
 					<br>
 					<br>
 					<input type="textarea" name="memo" value="" placeholder="메모를 입력해주세요">
-				</form>
+				</div>
 			</div>
 			<div class = "map">
+				<%-- <jsp:include page="tour3.jsp" flush="false"></jsp:include> --%>
 				<div id = "map_div"></div>
 			</div>
 		</div>
 	</div>
  	<script type="text/javascript">
  	
-		let m_ny = <%=ny%>;
+ 		let m_ny = <%=ny%>;
 		let m_nx = <%=nx%>;
 		
+		var markerList = [];
+		var pointArray = [];
 		
-		/*
 		
-		$("#dp_ny").val();	<== 출발지점 위도
-		$("#dp_nx").val();	<== 출발지점 경도
+		// $("#dp_ny").val();	//<== 출발지점 위도
+		// $("#dp_nx").val();	//<== 출발지점 경도
+		// $("#ep_ny").val();	//<== 도착지점 위도
+		// $("#ep_nx").val();	//<== 도착지점 경도
 		
-		$("#ep_ny").val();	<== 도착지점 위도
-		$("#ep_nx").val();	<== 도착지점 경도
-		
-		*/
-		
-		var map;
-
+	 	var map;
+		/*지도 실행하기(시작)*/
 		function initTmap(){
 			map = new Tmapv2.Map("map_div",{
-				center: new Tmapv2.LatLng(m_ny, m_nx),
+				center:	 new Tmapv2.LatLng(m_ny, m_nx),
 				width : "800px",
 				height : "942px",
 				zoom: 10
 			});
-			
 		};
+		/*지도 실행하기(끝)*/
 		
-		// 2. 시작, 도착 심볼찍기
+		/*나의 위치찍기(시작)*/
+		function geoLocation(location) {
+		    navigator.geolocation.getCurrentPosition(function(position){
+		        // 마커가 표시될 위치를 geolocation으로 얻어온 좌표로 생성합니다
+		        lat = position.coords.latitude; // 위도
+		        lon = position.coords.longitude; // 경도
 
-		var markerList = [];
-		var pointArray = [];
+		        console.log(lat);
+		        console.log(lon);
+		        
+		        if(location == "S"){
+		        	addMarker('S', lon, lat,1);
+		        	map.setCenter(new Tmapv2.LatLng(lat,lon));
+		        }
+		        else if(location == "E"){
+		        	addMarker("E",lon,lat,2);
+		        	map.setCenter(new Tmapv2.LatLng(lat,lon));
+		        }
+		    });
+		};
+		/*나의 위치찍기(끝)*/
 		
-		function dpointCheck(){
-			var st_ny = $("#dp_ny").val();
-			var st_nx = $("#dp_nx").val();
-			
-			$.ajax({
-				url: '/tour2.jsp',
-				data: 'st_ny='+st_ny+'st_nx='+st_nx,
-				type:'GET',
-				dataType:'json',
-				success:function(data){
-					addMarker("llStart",st_nx,st_nx,1);
-				},error:function(st_ny,st_nx){
-					console.log(st_ny,st_nx);
-				}
-			});
-		}
 		
-	/* 	function dpointCheck(){
-			alert($("#dp_ny").val());
-			alert($("#dp_nx").val());
-			alert($("#t_ny").val());
-			alert($("#t_nx").val());
-			alert($("#ep_ny").val());
-			alert($("#ep_nx").val());	
-		} */
-		
-		// 2. 시작, 도착 심볼찍기
-
-		var markerList = [];
-		var pointArray = [];
-
-			// 시작
-			addMarker("llStart",127.02810900563199,37.519892712436906,1);
-			// 도착 
-			addMarker("llEnd",127.11971717230388,37.49288934463672,2);
-			function addMarker(status, lon, lat, tag) {
+		/*마커 찍기(시작)*/
+		function addMarker(status, lon, lat, tag) {
 			//출도착경유구분
 			//이미지 파일 변경.
 			var markerLayer;
 			switch (status) {
-				case "llStart":
+				case "S":
 					imgURL = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png';
 					break;
-				case "llPass":
+				case "P":
 					imgURL = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_p.png';
 					break;
-				case "llEnd":
+				case "E":
 					imgURL = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png';
 					break;
 				default:
@@ -261,32 +241,36 @@
 			return marker;
 		}
 		
+		/*관광지 마커 찍기 시작*/
+		function TourMarker(status, lon, lat){
+			console.log(lon);
+			console.log(lat);
+			addMarker("P", lon, lat, 3);
+			map.setCenter(new Tmapv2.LatLng(lat,lon));
+		};
+		/*관광지 마커 찍기 끝*/
+		
+		/*마커 찍기(끝)*/
+			
+		/* 	function dpointCheck(){
+				alert($("#dp_ny").val());
+				alert($("#dp_nx").val());
+				alert($("#en_ny").val());
+				alert($("#en_nx").val());
+			} */
+			
 		
 		/*주소 찾기 팝업창*/
 		/*시작점 주소찾기*/
-		function searchAddressd(status, idx){
-			var pop1 = window.open("searchaddress_d.jsp?status="+status+"&idx="+idx,"pop1","width=600,height=670, scrollbars=yes, resizable=yes");
-		
-		
-		}
+		function searchAddressd(status){
+			var pop1 = window.open("searchaddress_d.jsp","pop1","width=600,height=670, scrollbars=yes, resizable=yes");
+			}
 		/*도착점 주소찾기*/
-		function searchAddresse(status, idx){
-			var pop2 = window.open("searchaddress_e.jsp?status="+status+"&idx="+idx,"pop2","width=600,height=670, scrollbars=yes, resizable=yes");
+		function searchAddresse(){
+			var pop2 = window.open("searchaddress_e.jsp","pop2","width=600,height=670, scrollbars=yes, resizable=yes");
 
-		function dpointMarker(){
-			
-			alert(s_ny);
-			alert(s_nx);
-			alert(e_ny);
-			alert(e_nx);
-			/* var marker = new Tmapv2.Marker({
-	            position: new Tmapv2.LatLng(s_ny,s_nx), //Marker의 중심좌표 설정.
-	            map: map, //Marker가 표시될 Map 설정..
-	            offset : new Tmapv2.Point(12,38), // 마커 아이콘의 오프셋 설정(생략시 Point(폭/2, 높이)로 설정)
-	            icon : 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_a.png', //마커 아이콘 설정.(생략시 기본이미지 적용)
-	            iconSize : new Tmapv2.Size(24,38) //마커 아이콘 사이즈 (생략시 이미지의 크기 적용)
-	        }); */
-		}
+			}
+		
 		
 	</script>
 
