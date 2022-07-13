@@ -27,78 +27,212 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-	<style>
-	body { 
-	  font-size: 25px; 
-	}
-	
-	h2 {
-	  text-align: center;
-	  padding: 20px 0;
-	}
-	
-	table caption {
-	  padding: .5em 0;
-	}
-	
-	table.dataTable th,
-	table.dataTable td {
-	  white-space: nowrap;
-	}
-	
-	.p {
-	  text-align: center;
-	  padding-top: 140px;
-	  font-size: 14px;
-	}
-    </style>
+<style>
+.responsive-table {
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+.responsive-table thead {
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.responsive-table thead th {
+  background-color: #1d96b2;
+  border: 1px solid #1d96b2;
+  font-weight: normal;
+  text-align: center;
+  color: white;
+}
+.responsive-table thead th:first-of-type {
+  text-align: left;
+}
+.responsive-table tbody,
+.responsive-table tr,
+.responsive-table th,
+.responsive-table td {
+  display: block;
+  padding: 0;
+  text-align: left;
+  white-space: normal;
+}
+.responsive-table th,
+.responsive-table td {
+  padding: .5em;
+  vertical-align: middle;
+}
+.responsive-table caption {
+  margin-bottom: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  text-align: center;
+}
+.responsive-table tfoot {
+  font-size: .8em;
+  font-style: italic;
+}
+.responsive-table tbody tr {
+  margin-bottom: 1em;
+  border: 2px solid #1d96b2;
+}
+.responsive-table tbody tr:last-of-type {
+  margin-bottom: 0;
+}
+.responsive-table tbody th[scope="row"] {
+  background-color: #1d96b2;
+  color: white;
+}
+.responsive-table tbody td[data-type=currency] {
+  text-align: right;
+}
+.responsive-table tbody td[data-title]:before {
+  content: attr(data-title);
+  float: left;
+  font-size: .8em;
+  color: rgba(94, 93, 82, 0.75);
+}
+.responsive-table tbody td {
+  text-align: right;
+  border-bottom: 1px solid #1d96b2;
+}
+
+
+@media (min-width: 52em) {
+  .responsive-table {
+    font-size: .9em;
+  }
+  .responsive-table thead {
+    position: relative;
+    clip: auto;
+    height: auto;
+    width: auto;
+    overflow: auto;
+  }
+  .responsive-table tr {
+    display: table-row;
+  }
+  .responsive-table th,
+  .responsive-table td {
+    display: table-cell;
+    padding: .5em;
+  }
+
+  .responsive-table caption {
+    font-size: 1.5em;
+  }
+  .responsive-table tbody {
+    display: table-row-group;
+  }
+  .responsive-table tbody tr {
+    display: table-row;
+    border-width: 1px;
+  }
+  .responsive-table tbody tr:nth-of-type(even) {
+    background-color: rgba(94, 93, 82, 0.1);
+  }
+  .responsive-table tbody th[scope="row"] {
+    background-color: transparent;
+    color: #5e5d52;
+    text-align: left;
+  }
+  .responsive-table tbody td {
+    text-align: center;
+  }
+  .responsive-table tbody td[data-title]:before {
+    content: none;
+  }
+}
+@media (min-width: 62em) {
+  .responsive-table {
+    font-size: 1em;
+  }
+  .responsive-table th,
+  .responsive-table td {
+    padding: .75em .5em;
+  }
+  .responsive-table tfoot {
+    font-size: .9em;
+  }
+}
+
+@media (min-width: 75em) {
+  .responsive-table th,
+  .responsive-table td {
+    padding: .75em;
+  }
+}
+</style>
 </head>
 <body>
 	<%
 		String cityname = request.getParameter("c_name");
 	%>
-	
+	<br>
+	<h5 style="text-align: center;">지역 관광지 리스트</h5>
+ 	<br>
+ <table class="responsive-table">
+    <thead>
+      <tr>
+      	<th scope="col">관광지명</th>
+        <th scope="col">관광지사진</th>
+        <th scope="col">관광지명주소(도로명)</th>
+        <th scope="col">관광지명주소(지번)</th>
+        <th scope="col">관광지 소개</th>
+        <th scope="col">전화 번호</th>
+        <th scope="col">관광루트로 지정</th>
+        <th scope="col" style="display:none">dd</th>
+        <th scope="col" style="display:none">dd</th>
+      </tr>
+    </thead>
+    <tbody>
+   	 <%
+      	TourDAO tourdao = new TourDAO();
+      	ArrayList<Tour> tlist = tourdao.SelectCity_T(cityname);
+      	
+      	for(int i=0; i<tlist.size(); i++){
+      %>
+	      <tr>
+	        <th scope="row" id="t_name"><%=tlist.get(i).getT_name() %></th>
+	        <td data-title="사진"><img src="/resources/images/tour_pic/<%=tlist.get(i).getT_photo() %>" width=100 height=100></td>
+	        <td data-title="도로명주소"><%=tlist.get(i).getT_loadaddress() %></td>
+	        <td data-title="지번 주소" data-type="currency"><%=tlist.get(i).getT_gnumaddress() %></td>
+	        <td data-title="간단소개" data-type="currency"><%=tlist.get(i).getT_intro() %></td>
+	        <td data-title="전화번호" data-type="currency"><%=tlist.get(i).getT_tel() %></td>
+	      	<td data-title="관광지로 지정"><button onclick="selectTour('<%=tlist.get(i).getT_name() %>',<%=tlist.get(i).getT_ny() %>,<%=tlist.get(i).getT_nx() %>);">추가하기</button></td>
+	      	<td data-title="관광지 위도" id="t_ny" style="display:none"><%=tlist.get(i).getT_ny() %></td>
+	      	<td data-title="관광지 경도" id="t_nx" style="display:none"><%=tlist.get(i).getT_nx() %></td>
+	      </tr>
+      <%
+      	}
+      %>
+    </tbody>
+  </table>	
 
-<div class="container">
-<h2>관광지 리스트</h2>
-  <div class="row">
-    <div class="col-xs-12">
-      <table class="table table-bordered table-hover dt-responsive">
-        <thead>
-          <tr>
-            <th>관광지명</th>
-            <th>관광지사진</th>
-            <th>관광지 전화번호</th>
-            <th>버튼 추가</th>
-            <th>관광지 설명</th>
-          </tr>
-        </thead>
-        <tbody>
-        <%
-        
-        	TourDAO tourdao = new TourDAO();
-        	ArrayList<Tour> tlist = tourdao.SelectCity_T(cityname);
-        	for(int i=0; i<tlist.size(); i++){
-        		
-        %>
-          <tr>
-            <td><%=tlist.get(i).getT_name() %></td>
-            <td><img src="/resources/images/tour_pic/<%=tlist.get(i).getT_photo() %>" width=100 height=100></td>
-            <td><%=tlist.get(i).getT_tel() %></td>
-            <td><button type = "button" >+</button></td>
-            <td><%=tlist.get(i).getT_intro() %></td>
-          </tr>
-		<%
-        	}
-		%>
-      </table>
-    </div>
-  </div>
-</div>
 
-      <script id="rendered-js" >
-	$('table').DataTable();
 
+    <script>
+	function selectTour(tourname,latitude,longitude){
+		
+		/* var tourname=document.getElemnetById('t_name');
+		var latitude=document.getElemnetById('t_ny');
+		var longitude=document.getElemnetById('t_nx'); */
+		
+		/*값 확인을 위한 출력문*/
+		/*  alert(tourname);
+		alert(latitude);
+		alert(longitude);  */
+		
+		opener.document.getElementById('t_name').value = tourname;
+		opener.document.getElementById('t_ny').value = latitude;	//위도
+		opener.document.getElementById('t_nx').value = longitude;	//경도
+		window.close();
+	}
     </script>
-
+ </body>
 </html>

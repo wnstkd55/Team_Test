@@ -16,6 +16,7 @@ var resultMarkerArr = [];
 var infoWindowArr = []; 
 
 /*지도 띄우기*/
+/*
 function initTmap() {
 	map = new Tmapv2.Map("map_div", {
 		center : new Tmapv2.LatLng(37.49241689559544, 127.03171389453507),
@@ -27,6 +28,7 @@ function initTmap() {
 	});
 	
 }
+*/
 
 /* 관광지 지정*/
 function setDestination(destAxisY, destAxisX, destTitle) {	//정보 받기
@@ -46,11 +48,6 @@ function searchAddressd(status, idx){
 /*도착점 주소찾기*/
 function searchAddresse(status, idx){
 	var pop2 = window.open("searchaddress_e.jsp?status="+status+"&idx="+idx,"pop2","width=600,height=670, scrollbars=yes, resizable=yes");
-}
-
-/*관광지 리스트 보기*/
-function tourlist(cityname){
-	var pop = window.open("tourlist.jsp?c_name="+cityname,"pop","width=600, height=670, scrollbars=yes, resizable=yes");
 }
 
 /* 팝업창에서 콜백하기*/

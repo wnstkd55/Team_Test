@@ -214,40 +214,7 @@ function initTagList() {
 	
 }
 
-function changeDestinationRegion(regionObj) {
-	
-	// var region = $("select[name='dest_region']").val();
-	var region = $(regionObj).val();
-	var regionMap = {};
-	regionMap["강원도"] = "37.555837,128.209315";
-	regionMap["경기도"] = "37.567167,127.190292";
-	regionMap["경상남도"] = "35.259787,128.664734";
-	regionMap["경상북도"] = "36.248647,128.664734";
-	regionMap["충청남도"] = "36.557229,126.779757";
-	regionMap["충청북도"] = "36.628503,127.929344";
-	regionMap["서울특별시"] = "37.540705,126.956764";
-	regionMap["광주광역시"] = "35.126033,126.831302";
-	regionMap["대구광역시"] = "35.798838,128.583052";
-	regionMap["대전광역시"] = "36.321655,127.378953";
-	regionMap["부산광역시"] = "35.198362,129.053922";
-	regionMap["울산광역시"] = "35.519301,129.239078";
-	regionMap["인천광역시"] = "37.469221,126.573234";
-	regionMap["전라북도"] = "35.716705,127.144185";
-	regionMap["전라남도"] = "34.819400,126.893113";
-	regionMap["제주특별자치도"] = "33.364805,126.542671";
-
-	setMapCenter(regionMap[region]);
-
-	initTagList();
-	getDestinationList('1');
-}
-
-function changeCategory(page, cate) {
-	initTagList();
-	getDestinationList(page, cate);
-}
-
-function getDestinationList(page, cate, tag_list) {
+function getDestinationList(page, tag_list) {
 	var tag_arr = [];
 	if(tag_list) tag_arr = tag_list;
 	var pageNo = 1;
@@ -256,22 +223,6 @@ function getDestinationList(page, cate, tag_list) {
 	var region = $("#travelRoute select[name='dest_region']").val();
 	if($("#media1023").css('display') != "none") region = $("#dest_region").val();
 
-   	if(!cate) {
-   		var cate_name = {};
-   		cate_name["관광"] = "관광지";
-   		cate_name["숙박"] = "숙박";
-   		cate_name["레져"] = "체험";
-   		cate_name["식당"] = "음식점";
-   		cate_name["쇼핑"] = "쇼핑";
-   		var catObj = $("li.normal-cat a.cate-btn");
-    	if($("#media1023").css('display') != "none") catObj = $("li.mobile-cat a.cate-btn");
-   		$(catObj).each(function() {
-   			if($(this).hasClass('on')) {
-   				cate = $(this).text();
-   			}
-   		});
-   		cate = cate_name[cate];
-   	}
 
 	if(!tag_list) {
 		var tagObj = ("ul.normal-cat-list li label input[type=checkbox]");
@@ -298,9 +249,7 @@ function getDestinationList(page, cate, tag_list) {
     	
     	if($("#media1023").css('display') == "none") {
     		setDestinationList(data);
-    	} else {
-    		setDestinationListMobile(data);
-    	}
+    	} 
     });
 }
 
@@ -353,51 +302,6 @@ function setDestinationList(data, paginationType) {
 			}
 	       	$("ul.result_list").empty();
 	       	$("ul.result_list").append(lists);
-			//pagination
-	       	setPaginationInfo(obj.paginationInfo, paginationType);
-	    }
-	} catch (e) {
-		// console.log(e.name);
-		// console.log(e.message);
-		alert("일시적인 에러가 발생했습니다. 잠시 후 다시 시도해 주세요."); return false;
-	}
-}
-function setDestinationListMobile(data, paginationType) {
-	// console.log(data); return;
-	try {
-		var obj = JSON.parse(data);
-	    if(obj.constructor !== Object){
-	    	console.log("데이터를 가져오지 못했습니다.");
-	    	throw new SyntaxError("데이터를 가져오지 못함");
-	    }else{
-	        var lists = "";
-	        var dest = obj.resultList;
-	    	for(var i=0; i<dest.length; i++) {
-				lists += "<li data-lat=\""+dest[i]["destAxisY"]+"\" data-lon=\""+dest[i]["destAxisX"]+"\" data-destid=\""+dest[i]["destId"]+"\">";
-				lists += "<div class=\"day_box\">";
-				lists += "<a href=\"#none\" class=\"tbox\">";
-				lists += "<span class=\"sub\">"+dest[i]["destCategory"]+"</span>";
-				lists += "<span class=\"txt\">"+dest[i]["destTitle"]+"</span>";
-				lists += "</a>";
-				lists += "<div class=\"mob_detail_info_area\" style=\"display:none;\">";
-				lists += "<div class=\"tit_box\">";
-				lists += "<p>상세정보</p>";
-				lists += "</div>";
-				lists += "<div class=\"info_lst\">";
-				lists += "<ul>";
-				lists += "<li>전화번호 : "+dest[i]["destPhone"]+"</li>";
-				lists += "<li>주소 : "+dest[i]["destAddress"]+"</li>";
-				lists += "<li>명칭 : "+dest[i]["destTitle"]+"</li>";
-				lists += "</ul>";
-				lists += "</div>";
-				lists += "<div class=\"detail_txt\">"+(dest[i]["destInformation"] == null ? '' : dest[i]["destInformation"])+"</div>";
-				lists += "</div>";
-				lists += "<a href=\"javascript:;\" class=\"ico_add mob_plus\" onclick=\"addPointMobile(this);\">선택</a>";
-				lists += "</div>";
-				lists += "</li>";
-			}
-	       	$("#result_list").empty();
-	       	$("#result_list").append(lists);
 			//pagination
 	       	setPaginationInfo(obj.paginationInfo, paginationType);
 	    }
@@ -544,8 +448,6 @@ function setPointSticky(infoObj) {
 	infoWindowArr.push(infoWindow);
 
 	map.setCenter(new Tmapv2.LatLng(lat,lon));
-	/* map.setZoom(10); //TMap.prototype.setZoom - setScaleOffset 
-	- Uncaught TypeError: n.screenPoint.equals is not a function */
 }
 
 //거리계산 , 택시 요금 계산 시간 계산
