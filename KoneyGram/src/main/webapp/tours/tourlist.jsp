@@ -219,18 +219,12 @@
     <script>
 	function selectTour(tourname,latitude,longitude){
 		
-		/* var tourname=document.getElemnetById('t_name');
-		var latitude=document.getElemnetById('t_ny');
-		var longitude=document.getElemnetById('t_nx'); */
+		window.opener.document.getElementById('t_name1').value = tourname;
+		window.opener.document.getElementById('t_ny1').value = latitude;	//위도
+		window.opener.document.getElementById('t_nx1').value = longitude;	//경도
 		
-		/*값 확인을 위한 출력문*/
-		/*  alert(tourname);
-		alert(latitude);
-		alert(longitude);  */
+		window.opener.TourMarker(longitude,latitude);
 		
-		opener.document.getElementById('t_name').value = tourname;
-		opener.document.getElementById('t_ny').value = latitude;	//위도
-		opener.document.getElementById('t_nx').value = longitude;	//경도
 		window.close();
 	}
     </script>
