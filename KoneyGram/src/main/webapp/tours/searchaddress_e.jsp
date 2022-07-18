@@ -290,9 +290,12 @@ function getaddressInfo(roadFullAddr, latitude, longitude){
 	/* 	alert(roadFullAddr);
 	alert(latitude);
 	alert(longitude); */
-	opener.document.getElementById('ep_name').value = roadFullAddr;
-	opener.document.getElementById('ep_ny').value = latitude;
-	opener.document.getElementById('ep_nx').value = longitude;
+	window.opener.document.getElementById('ep_name').value = roadFullAddr;
+	window.opener.document.getElementById('ep_ny').value = latitude;
+	window.opener.document.getElementById('ep_nx').value = longitude;
+	
+	window.opener.popAddress('E',longitude,latitude);
+	
 	window.close();
 }
 

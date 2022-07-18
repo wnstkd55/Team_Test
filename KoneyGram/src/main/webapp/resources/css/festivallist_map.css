@@ -1,0 +1,137 @@
+.OUTLINE {
+    stroke-linejoin:round;
+    stroke: #ffffff;
+    stroke-width: 2;
+}
+#CD11 {
+    fill: rgb(139, 139, 139);
+}
+#CD11:hover {
+    fill: #f1c40f;
+    transition: 0.13s;
+}
+#CD26 {
+    fill: rgb(139, 139, 139);
+}
+#CD26:hover {
+    fill: #16a085;
+    transition: 0.13s;
+}
+#CD27 {
+    fill: rgb(139, 139, 139);
+}
+
+#CD27:hover {
+    fill: #f39c12;
+    transition: 0.13s;
+}
+
+#CD28 {
+    fill: rgb(139, 139, 139);
+}
+
+#CD28:hover {
+    fill: #2ecc71;
+    transition: 0.13s;
+}
+
+#CD29 {
+    fill: rgb(139, 139, 139);
+}
+#CD29:hover {
+    fill: #e67e22;
+    transition: 0.13s;
+}
+
+#CD30 {
+    fill: rgb(139, 139, 139);
+}
+
+#CD30:hover {
+    fill: #27ae60;
+    transition: 0.13s;
+}
+#CD31 {
+    fill: rgb(139, 139, 139);
+}
+#CD31:hover {
+    fill: #d35400;
+    transition: 0.13s;
+}
+#CD36 {
+    fill: rgb(139, 139, 139);
+}
+#CD36:hover {
+    fill: #3498db;
+    transition: 0.13s;
+}
+#CD41 {
+    fill: rgb(139, 139, 139);
+}
+#CD41:hover {
+    fill: #e74c3c;
+    transition: 0.13s;
+}
+#CD42 {
+    fill: rgb(139, 139, 139);
+}
+#CD42:hover {
+    fill: #2980b9;
+    transition: 0.13s;
+}
+#CD43 {
+    fill: rgb(139, 139, 139);
+}
+#CD43:hover {
+    fill: #c0392b;
+    transition: 0.13s;
+}
+#CD44 {
+    fill: rgb(139, 139, 139);
+}
+#CD44:hover {
+    fill: #9b59b6;
+    transition: 0.13s;
+}
+#CD45 {
+    fill: rgb(139, 139, 139);
+}
+#CD45:hover {
+    fill: #8e44ad;
+    transition: 0.13s;
+}
+#CD46 {
+    fill: rgb(139, 139, 139);
+}
+#CD46:hover {
+    fill: #34495e;
+    transition: 0.13s;
+}
+#CD47 {
+    fill: rgb(139, 139, 139);
+}
+#CD47:hover {
+    fill: #2c3e50;
+    transition: 0.13s;
+}
+#CD48 {
+    fill: rgb(139, 139, 139);
+}
+#CD48:hover {
+    fill: #1abc9c;
+    transition: 0.13s;
+}
+#CD50 {
+    fill: rgb(139, 139, 139);
+}
+#CD50:hover {
+    fill: #f1c40f;
+    transition: 0.13s;
+}
+.TEXT {
+    fill: #ffffff;
+    font-size: 16;
+    font-weight: bold;
+    text-anchor: middle;
+    alignment-baseline: middle;
+}

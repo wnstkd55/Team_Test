@@ -287,20 +287,15 @@ function setPoiResultEl(arrResultArr) {
 
 function getaddressInfo(roadFullAddr, latitude, longitude){
 	/*값 확인을 위한 출력문*/
-	alert(roadFullAddr);
+/* 	alert(roadFullAddr);
 	alert(latitude);
-	alert(longitude);
+	alert(longitude); */
 	
-	opener.document.getElementById("dp_name1") = roadFullAddr;
-	opener.document.getElementById("dp_ny1") = latitude;
-	opener.document.getElementById("dp_nx1") = longitude;
+	window.opener.document.getElementById("dp_name").value = roadFullAddr;
+	window.opener.document.getElementById("dp_ny").value = latitude;
+	window.opener.document.getElementById("dp_nx").value = longitude;
 	
-	parent.addMarker('S',longitude,latitude);
-	
-/* 	$("#dp_name", opener.document).val(roadFullAddr);
-	$("#dp_ny", opener.document).val(latitude);
-	$("#dp_nx", opener.document).val(longitude);
- */	
+	window.opener.popAddress('S',longitude,latitude);
 	
 	window.close();
 }
