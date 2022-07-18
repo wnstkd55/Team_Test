@@ -172,6 +172,7 @@
 <body>
 	<%
 		String cityname = request.getParameter("c_name");
+		String tag = request.getParameter("tag");
 	%>
 	<br>
 	<h5 style="text-align: center;">지역 관광지 리스트</h5>
@@ -217,16 +218,37 @@
 
 
     <script>
+    
+    var tag = <%=tag%>;
+    
 	function selectTour(tourname,latitude,longitude){
 		
-		window.opener.document.getElementById('t_name1').value = tourname;
-		window.opener.document.getElementById('t_ny1').value = latitude;	//위도
-		window.opener.document.getElementById('t_nx1').value = longitude;	//경도
+		if(tag == '1'){
+		
+			window.opener.document.getElementById('t_name1').value = tourname;
+			window.opener.document.getElementById('t_ny1').value = latitude;	//위도
+			window.opener.document.getElementById('t_nx1').value = longitude;	//경도
+			
+			window.opener.TourMarker1(longitude,latitude);
+			
+			window.close();
+			
+		}else if(tag == '2'){
+			window.opener.document.getElementById('t_name2').value = tourname;
+			window.opener.document.getElementById('t_ny2').value = latitude;	//위도
+			window.opener.document.getElementById('t_nx2').value = longitude;	//경도
+			
+			window.opener.TourMarker2(longitude,latitude);
+			
+			window.close();
+		}
 		
 		window.opener.TourMarker(longitude,latitude);
 		
 		window.close();
 	}
+	
+	
     </script>
  </body>
 </html>

@@ -102,44 +102,44 @@
 					<button id = "dpointcheck" onclick="geoLocation('S')">현재내위치 찍기</button>
 					<h5>관광지 입력하기</h5>
 						<input type = "text" id="t_name1" name = "tourname" value="" placeholder="관광지를 입력하세요">
-						<a href="tourlist.jsp?c_name=<%=cityname %>" 
+						<a href="tourlist.jsp?c_name=<%=cityname %>&tag=1" 
 							onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
 							관광리스트 보러가기
 						</a>
 						<input type = "hidden" id="t_ny1" name="t_ny" value="">
 						<input type = "hidden" id="t_nx1" name="t_nx" value="">
 					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
-						<a href="tourlist.jsp?c_name=<%=cityname %>" 
+						<input type = "text" id="t_name2" name = "tourname" value="" placeholder="관광지를 입력하세요">
+						<a href="tourlist.jsp?c_name=<%=cityname %>&tag=2" 
 							onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
 							관광리스트 보러가기
 						</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
+						<input type = "hidden" id="t_ny2" name="t_ny" value="">
+						<input type = "hidden" id="t_nx2" name="t_nx" value="">
 					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
+						<input type = "text" id="t_name3" name = "tourname" value="" placeholder="관광지를 입력하세요">
 							<a href="tourlist.jsp?c_name=<%=cityname %>" 
 								onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
 								관광리스트 보러가기
 							</a>
-							<input type = "hidden" id="t_ny" name="t_ny" value="">
-							<input type = "hidden" id="t_nx" name="t_nx" value="">
+							<input type = "hidden" id="t_ny3" name="t_ny" value="">
+							<input type = "hidden" id="t_nx3" name="t_nx" value="">
 					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
+						<input type = "text" id="t_name4" name = "tourname" value="" placeholder="관광지를 입력하세요">
 							<a href="tourlist.jsp?c_name=<%=cityname %>" 
 								onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
 								관광리스트 보러가기
 							</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
+						<input type = "hidden" id="t_ny4" name="t_ny" value="">
+						<input type = "hidden" id="t_nx4" name="t_nx" value="">
 					<h5>관광지 입력하기</h5>
-						<input type = "text" id="t_name" name = "tourname" value="" placeholder="관광지를 입력하세요">
+						<input type = "text" id="t_name5" name = "tourname" value="" placeholder="관광지를 입력하세요">
 							<a href="tourlist.jsp?c_name=<%=cityname %>" 
 								onclick="window.open(this.href, '_blank', 'width=650, height=600'); return false;">
 								관광리스트 보러가기
 							</a>
-						<input type = "hidden" id="t_ny" name="t_ny" value="">
-						<input type = "hidden" id="t_nx" name="t_nx" value="">
+						<input type = "hidden" id="t_ny5" name="t_ny" value="">
+						<input type = "hidden" id="t_nx5" name="t_nx" value="">
 					<h5>도착지 입력하기</h5>
 					<input type = "text" id="ep_name" name="ep_name" value="" placeholder="도착지를 입력을 위해 클릭해주세요" onclick="searchAddresse('E');">
 					<input type = "hidden" id="ep_ny" name="ep_ny" value="">
@@ -149,7 +149,7 @@
 					<br>
 					<br>
 					<textarea name="memo" placeholder="메모를 입력해주세요"></textarea>
-					<button onclick="markerInfo();">마커정보 보기</button>
+					<button onclick="route();">마커정보 보기</button>
 					<button onclick="removeMarker();"> 마커 지우기</button>
 					
 				</div>
@@ -171,6 +171,10 @@
 		
 		var pointArray = [];
 		
+		
+		var tourlist=[];
+		var passList="";
+		
 		var st_x;
 		var st_y;
 		var en_x;
@@ -187,6 +191,74 @@
 			});
 		};
 		/*지도 실행하기(끝)*/
+		
+		var new_polyLine = [];
+		var new_Click_polyLine = [];
+		
+		function drawData(data){
+			// 지도위에 선은 다 지우기
+			routeData = data;
+			var resultStr = "";
+			var distance = 0;
+			var idx = 1;
+			var newData = [];
+			var equalData = [];
+			var pointId1 = "-1234567";
+			var ar_line = [];
+			
+			for (var i = 0; i < data.features.length; i++) {
+				var feature = data.features[i];
+				//배열에 경로 좌표 저잘
+				if(feature.geometry.type == "LineString"){
+					ar_line = [];
+					for (var j = 0; j < feature.geometry.coordinates.length; j++) {
+						var startPt = new Tmapv2.LatLng(feature.geometry.coordinates[j][1],feature.geometry.coordinates[j][0]);
+						ar_line.push(startPt);
+						pointArray.push(feature.geometry.coordinates[j]);
+					}
+					var polyline = new Tmapv2.Polyline({
+				        path: ar_line,
+				        strokeColor: "#ff0000", 
+				        strokeWeight: 6,
+				        map: map
+				    });
+					new_polyLine.push(polyline);
+				}
+				var pointId2 = feature.properties.viaPointId;
+				if (pointId1 != pointId2) {
+					equalData = [];
+					equalData.push(feature);
+					newData.push(equalData);
+					pointId1 = pointId2;
+				}
+				else {
+					equalData.push(feature);
+				}
+			}
+			geoData = newData;
+			var markerCnt = 1;
+			for (var i = 0; i < newData.length; i++) {
+				var mData = newData[i];
+				var type = mData[0].geometry.type;
+				var pointType = mData[0].properties.pointType;
+				var pointTypeCheck = false; // 경유지 일때만 true
+				if (mData[0].properties.pointType == "S") {
+					var img = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png';
+					var lon = mData[0].geometry.coordinates[0];
+					var lat = mData[0].geometry.coordinates[1];
+				}
+				else if (mData[0].properties.pointType == "E") {
+					var img = 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png';
+					var lon = mData[0].geometry.coordinates[0];
+					var lat = mData[0].geometry.coordinates[1];
+				}
+				else {
+					markerCnt=i;
+					var lon = mData[0].geometry.coordinates[0];
+					var lat = mData[0].geometry.coordinates[1];
+				}	
+			}
+		}
 		
 		/*나의 위치찍기(시작)*/
 		function geoLocation(location) {
@@ -244,11 +316,44 @@
 		/*주소 팝업창에서 마크찍기(끝)*/
 		
 		/*관광지 마커 찍기 시작*/
-		function TourMarker(lon, lat){
+		function TourMarker1(lon, lat){
 			console.log(lon);
 			console.log(lat);
 			addMarker_p('P', lon, lat, 3);
 			map.setCenter(new Tmapv2.LatLng(lat,lon));
+			
+			var tour = lon+","+lat;
+			tourlist.push(tour);
+			
+			console.log(tourlist);
+			
+			for(var i=0; i<tourlist.length; i++){
+	            if(i>0){
+	                passList +="_";
+	            }
+	            passList += tourlist[i]
+	        };
+		};
+		/*관광지 마커 찍기 끝*/
+		
+				/*관광지 마커 찍기 시작*/
+		function TourMarker2(lon, lat){
+			console.log(lon);
+			console.log(lat);
+			addMarker_p('P', lon, lat, 3);
+			map.setCenter(new Tmapv2.LatLng(lat,lon));
+			
+			var tour = lon+","+lat;
+			tourlist.push(tour);
+			
+			console.log(tourlist);
+			
+			for(var i=0; i<tourlist.length; i++){
+	            if(i>0){
+	                passList +="_";
+	            }
+	            passList += tourlist[i]
+	        };
 		};
 		/*관광지 마커 찍기 끝*/
 		
@@ -287,18 +392,89 @@
 						icon: 'http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png',
 						map: map
 			});
-		/* 	// 마커 드래그 설정
-			marker.tag = tag;
-			marker.addListener("dragend", function (evt) {
-			markerListenerEvent(evt);
-		    });
-		    marker.addListener("drag", function (evt) {    	
-		    	markerObject = markerList[tag];
-		    });
-		    markerList[tag] = marker;
-			return marker; */
+	
 			end_markerList[tag] = marker_e;
 		}
+		
+		// 4. 경로탐색 API 사용요청
+		function route(){
+			var startX = st_x;
+			var startY = st_y;
+			var endX = en_x;
+			var endY = en_y;
+			var prtcl;
+			var headers = {};
+			headers["appKey"]="l7xx0027c9071859472394ee1ff449ed1fdf";
+			$.ajax({
+					method:"POST", 
+					headers : headers, 
+					url:"https://apis.openapi.sk.com/tmap/routes?version=1&format=json",//
+					async:false,
+					data:{ 
+						startX : startX,
+						startY : startY,
+						endX : endX,
+						endY : endY,
+						passList : passList,
+						reqCoordType : "WGS84GEO",
+						resCoordType : "WGS84GEO",
+						angle : "172",
+						searchOption : "0",
+						trafficInfo : "Y"
+					},
+					success:function(response){
+					prtcl = response;
+					
+					// 5. 경로탐색 결과 Line 그리기 
+					var trafficColors = {
+						extractStyles:true,
+						/* 실제 교통정보가 표출되면 아래와 같은 Color로 Line이 생성됩니다. */
+						trafficDefaultColor:"#636f63", //Default
+						trafficType1Color:"#19b95f", //원할
+						trafficType2Color:"#f15426", //지체
+						trafficType3Color:"#ff970e"  //정체		
+					};    			
+					var style_red = {
+						fillColor:"#FF0000",
+						fillOpacity:0.2,
+						strokeColor: "#FF0000",
+						strokeWidth: 3,
+						strokeDashstyle: "solid",
+						pointRadius: 2,
+						title: "this is a red line"
+					};
+					drawData(prtcl);
+				
+					// 6. 경로탐색 결과 반경만큼 지도 레벨 조정
+					var newData = geoData[0];
+					PTbounds = new Tmapv2.LatLngBounds();
+							for (var i = 0; i < newData.length; i++) {
+								var mData = newData[i];
+								var type = mData.geometry.type;
+								var pointType = mData.properties.pointType;
+								if(type == "Point"){
+									var linePt = new Tmapv2.LatLng(mData.geometry.coordinates[1],mData.geometry.coordinates[0]);
+									console.log(linePt);
+									PTbounds.extend(linePt);
+								}
+								else{
+									var startPt,endPt;
+									for (var j = 0; j < mData.geometry.coordinates.length; j++) {
+										var linePt = new Tmapv2.LatLng(mData.geometry.coordinates[j][1],mData.geometry.coordinates[j][0]);
+										PTbounds.extend(linePt);
+									}
+							}
+						}
+						map.fitBounds(PTbounds);
+				
+					},
+					error:function(request,status,error){
+					console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+				}
+			});
+
+		};
+		
 		
 		
 		/*주소 찾기 팝업창*/
