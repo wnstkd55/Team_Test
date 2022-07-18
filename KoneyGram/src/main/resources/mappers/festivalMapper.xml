@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="festivalMapper">
+	
+	  <select id="list" resultType="kr.co.vo.FestivalVO">
+		SELECT F_CODE
+			   , F_NAME
+			   , F_PLACE
+			   , F_STARTDATE
+			   , F_ENDDATE
+			   , F_TEL
+		  FROM FESTIVAL
+		  ORDER BY F_CODE DESC
+	</select>
+	
+	<!-- 축제 조회 -->
+	<select id="read" parameterType="int" resultType="kr.co.vo.FestivalVO">
+		SELECT	F_STARTDATE
+			  , F_ENDDATE
+			  , F_MAINC
+			  , F_TEL
+			  , F_HOME
+			  , F_CONTENT
+			  , F_NAME
+			  , F_NY
+			  , F_NX
+		 FROM FESTIVAL
+		 WHERE F_CODE = #{F_CODE}
+	</select>
+	
+	<!-- 축제 목록 -->
+	<select id="listfestival" resultType="kr.co.vo.FestivalVO" parameterType="kr.co.vo.SearchCriteria">
+		SELECT F_CODE
+			   , F_NAME
+			   , F_PLACE
+			   , F_STARTDATE
+			   , F_ENDDATE
+			   , F_TEL
+			   , F_ADMIN
+			   , F_NY
+			   , F_NX
+		 FROM ( 
+		        SELECT F_CODE
+		        	   , F_NAME
+					   , F_PLACE
+					   , F_STARTDATE
+					   , F_ENDDATE
+					   , F_TEL
+					   , F_ADMIN
+					   , F_NY
+					   , F_NX
+		               , ROW_NUMBER() OVER(ORDER BY F_STARTDATE DESC) AS RNUM
+		         FROM FESTIVAL
+		         WHERE 1=1 
+		         	<include refid="fsearch"></include>
+		                       ) FE
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+		ORDER BY F_STARTDATE DESC
+	</select>
+	
+	<select id="flistCount" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+		SELECT COUNT(F_CODE)
+		   FROM FESTIVAL
+		   WHERE 1=1
+		   AND F_CODE > 0
+		<include refid="fsearch"></include>	
+	</select>
+	
+	<sql id="fsearch">
+		<if test="searchType != null">
+			<if test="searchType == 'admin'.toString()">AND F_ADMIN LIKE '%' || #{keyword} || '%' ORDER BY F_STARTDATE DESC</if>
+			<if test="searchType == 'name'.toString()">AND F_NAME LIKE '%' || #{keyword} || '%' ORDER BY F_STARTDATE DESC</if>
+		<!-- <if test="searchType == 'sdate'.toString()"><![CDATA[ AND '${keyword}' < F_STARTDATE ]]></if>  -->	
+			<if test="searchType == 'sdate'.toString()"> AND (TO_DATE(#{keyword},'YYYY-MM-DD') BETWEEN TO_DATE(F_STARTDATE,'YYYY-MM-DD') AND TO_DATE(F_ENDDATE,'YYYY-MM-DD')) ORDER BY F_STARTDATE DESC</if>
+		</if>
+	</sql>
+	
+	
+	<!-- 지도 클릭하면 각 도에 맞는 목록만 나옴 -->
+   <select id = "selectByAdmin" resultType="kr.co.vo.FestivalVO" parameterType="kr.co.vo.SearchCriteria">
+
+	  		SELECT  F_CODE, 
+		  			   F_NAME, 
+		  			   F_PLACE, 
+		  			   F_STARTDATE, 
+		  			   F_ENDDATE, 
+		  			   F_TEL, 
+		  			   F_ADMIN,
+		  			   F_NY,
+		  			   F_NX
+		  	FROM (
+	  			SELECT F_CODE, 
+		  			   F_NAME, 
+		  			   F_PLACE, 
+		  			   F_STARTDATE, 
+		  			   F_ENDDATE, 
+		  			   F_TEL, 
+		  			   F_ADMIN,
+		  			   F_NY,
+		  			   F_NX,
+		  			   ROW_NUMBER() OVER(ORDER BY F_STARTDATE) AS RNUM
+	  		FROM FESTIVAL
+	  		WHERE 1 = 1
+	  		AND F_ADMIN = #{f_admin}
+	  		<include refid="fsearch"></include>
+	  		) FE
+	  		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
+	  		
+	  		ORDER BY F_STARTDATE DESC   
+  	</select>   
+  	
+  	<select id="flistCountByAdmin" parameterType="kr.co.vo.SearchCriteria" resultType="int">
+		SELECT COUNT(F_CODE)
+		   FROM FESTIVAL
+		   WHERE 1=1
+		   AND F_CODE > 0
+		   AND F_ADMIN = #{f_admin}
+		<include refid="fsearch"></include>	
+	</select>
+
+</mapper>
